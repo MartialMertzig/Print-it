@@ -26,35 +26,53 @@ let indexSlideActive = 0;
 
 let arrow_left = document.querySelector(".arrow_left");
 arrow_left.addEventListener("click", function () {
-	//Décrémentation : indexSlideActive--
+//Décrémentation : indexSlideActive--
 	indexSlideActive = indexSlideActive -1;
     if (indexSlideActive < 0){
 	    indexSlideActive = slides.length - 1;
 	}
-	const prefix = "assets/images/slideshow/";
-    document.querySelector(".banner-img").src = prefix + slides[indexSlideActive].image;
-	document.querySelector("#banner p").innerHTML = slides[indexSlideActive].tagLine;
+//Méthode
+	update(indexSlideActive);
 });
 
 let arrow_right = document.querySelector(".arrow_right");
 arrow_right.addEventListener("click", function () {
-	//Décrémentation : indexSlideActive++
+//Décrémentation : indexSlideActive++
 	indexSlideActive = indexSlideActive +1;
     if (indexSlideActive > slides.length -1 ){
 	    indexSlideActive = 0;
 	}
-	const prefix = "assets/images/slideshow/";
-	//Img de la bannière, le préfix appel le chemin des images
-    document.querySelector(".banner-img").src = prefix + slides[indexSlideActive].image;
-	//Agit sur le P et le Span dans la bannière
-	document.querySelector("#banner p").innerHTML = slides[indexSlideActive].tagLine;
+//Méthode
+	update(indexSlideActive);
 });
 
 const dots = document.querySelector(".dots");
-	//Tableau Slides
+//Tableau Slides et création des points
 slides.forEach (function (slide, index){
-	//Pour chaque dot on créer une div
+//Pour chaque dot on créer une div
 	let dot = document.createElement("div");
 	dot.classList.add("dot");
 	dots.appendChild(dot);
+})
+
+//Méthode
+function update(indexSlideActive) {
+	const prefix = "assets/images/slideshow/";
+//Img de la bannière, le préfix appel le chemin des images
+    document.querySelector(".banner-img").src = prefix + slides[indexSlideActive].image;
+//Agit sur le P et le Span dans la bannière
+	document.querySelector("#banner p").innerHTML = slides[indexSlideActive].tagLine;
+//Recupere tout les points sur la page
+	let dots = document.querySelectorAll('.dot');
+//Annule le dot_selected
+	dots.forEach(dot=>{
+		dot.classList.remove('dot_selected');
+	});
+//Ajoute le dot_selected sur le bon point
+	dots[indexSlideActive].classList.add('dot_selected');
+
+}
+//Charge le point blanc une fois que la page est chargée
+document.addEventListener('DOMContentLoaded', function(){
+	update(indexSlideActive);
 })
