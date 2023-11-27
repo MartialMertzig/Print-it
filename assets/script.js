@@ -1,4 +1,3 @@
-
 //Variable constante (const) de type tableau, 
 //les valeurs à l'intérieur du tableau ne vont pas bouger pendant l'éxecution du code
 
@@ -31,6 +30,7 @@ arrow_left.addEventListener("click", function () {
     if (indexSlideActive < 0){
 	    indexSlideActive = slides.length - 1;
 	}
+
 //Méthode
 	update(indexSlideActive);
 });
@@ -42,6 +42,7 @@ arrow_right.addEventListener("click", function () {
     if (indexSlideActive > slides.length -1 ){
 	    indexSlideActive = 0;
 	}
+	
 //Méthode
 	update(indexSlideActive);
 });
